@@ -61,7 +61,7 @@ namespace Lab_6
                 Console.WriteLine($"Фамилия: {_surname ?? "не задано"}");
 
                 Console.Write("Коэффициенты:\t");
-                if (_coefs == null) Console.Write("не заданы");
+                if (_coefs == null) Console.WriteLine("не заданы");
                 else
                 {
                     foreach (var coef in _coefs)
@@ -73,7 +73,7 @@ namespace Lab_6
                 }
 
                 Console.Write("Оценки:");
-                if (_marks == null) Console.Write("не заданы");
+                if (_marks == null) Console.WriteLine("не заданы");
                 else
                 {
                     for (int i = 0; i < _marks.GetLength(0); i++)
@@ -134,7 +134,7 @@ namespace Lab_6
                 Console.WriteLine($"Имя: {_name ?? "не задано"}");
 
                 Console.Write("Любимые оценки:\t");
-                if (_favouriteMarks == null) Console.Write("не заданы");
+                if (_favouriteMarks == null) Console.WriteLine("не заданы");
                 else
                 {
                     foreach (var mark in _favouriteMarks)

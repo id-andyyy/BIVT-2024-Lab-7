@@ -57,7 +57,7 @@ namespace Lab_6
                 Console.WriteLine($"Расстояние: {_distance}");
 
                 Console.Write($"Оценки:\t");
-                if (_marks == null) Console.Write("не заданы");
+                if (_marks == null) Console.WriteLine("не заданы");
                 else
                 {
                     foreach (var mark in _marks)
