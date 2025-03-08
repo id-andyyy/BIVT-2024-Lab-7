@@ -78,9 +78,7 @@ namespace Lab_6
             private string _name;
             private int _standard;
             private Participant[] _participants;
-
-            private int _curParticipant;
-
+            
             public string Name => _name;
             public int Standard => _standard;
             public Participant[] Participants => _participants; // if a copy is returned, Participant.Sort will not work
@@ -90,30 +88,31 @@ namespace Lab_6
                 _name = name;
                 _standard = standard;
                 _participants = new Participant[0];
-
-                _curParticipant = 0;
             }
 
             public void Add(Participant participant)
             {
-                if (_participants == null) return;
+                if (_participants == null) _participants = new Participant[0];
 
                 Array.Resize(ref _participants, _participants.Length + 1);
-                _participants[_participants.Length - 1] = participant;
+                _participants[^1] = participant;
             }
 
             public void Add(Participant[] participants)
             {
-                if (_participants == null || participants == null) return;
+                if (participants == null) return;
+                if (_participants == null) _participants = new Participant[0];
 
                 _participants = _participants.Concat(participants).ToArray();
             }
 
             public void Jump(int distance, int[] marks)
             {
-                if (_participants == null || _curParticipant >= _participants.Length) return;
+                if (_participants == null) return;
+                int index = Array.FindIndex(_participants, x => x.Marks != null && x.Marks.All(y => y == 0));
+                if (index == -1) return;
 
-                _participants[_curParticipant++].Jump(distance, marks, _standard);
+                _participants[index].Jump(distance, marks, _standard);
             }
 
             public void Print()

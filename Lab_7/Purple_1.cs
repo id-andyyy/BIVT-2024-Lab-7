@@ -172,16 +172,17 @@ namespace Lab_6
 
             public void Add(Participant participant)
             {
-                if (_participants == null) return;
+                if (_participants == null) _participants = new Participant[0];
 
                 Array.Resize(ref _participants, _participants.Length + 1);
-                _participants[_participants.Length - 1] = participant;
-                Evaluate(_participants[_participants.Length - 1]);
+                _participants[^1] = participant;
+                Evaluate(_participants[^1]);
             }
 
             public void Add(Participant[] participants)
             {
-                if (_participants == null || participants == null) return;
+                if (participants == null) return;
+                if (_participants == null) _participants = new Participant[0];
 
                 int n = _participants.Length;
                 _participants = _participants.Concat(participants).ToArray();

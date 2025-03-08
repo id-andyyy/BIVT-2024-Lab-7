@@ -115,9 +115,7 @@ namespace Lab_6
         {
             protected Participant[] participants;
             protected double[] moods;
-
-            private int _curParticipant;
-
+            
             public Participant[] Participants => (Participant[])participants?.Clone();
             public double[] Moods => (double[])moods?.Clone();
 
@@ -125,10 +123,8 @@ namespace Lab_6
             {
                 participants = new Participant[0];
                 
-                _curParticipant = 0;
-
                 if (moods == null) return;
-                this.moods = moods;
+                this.moods = (double[])moods.Clone();
                 ModificateMood();
             }
 
@@ -136,27 +132,28 @@ namespace Lab_6
 
             public void Evaluate(double[] marks)
             {
-                if (marks == null || moods == null || participants == null || _curParticipant == participants.Length) return;
+                if (marks == null || moods == null || participants == null) return;
+                int index = Array.FindIndex(participants, x => x.Marks != null && x.Marks.All(y => y == 0));
+                if (index == -1) return;
 
                 for (int i = 0; i < marks.Length; i++)
                 {
-                    participants[_curParticipant].Evaluate(marks[i] * moods[i]);
+                    participants[index].Evaluate(marks[i] * moods[i]);
                 }
-
-                _curParticipant++;
             }
 
             public void Add(Participant participant)
             {
-                if (participants == null) return;
+                if (participants == null) participants = new Participant[0];
                 
                 Array.Resize(ref participants, participants.Length + 1);
-                participants[participants.Length - 1] = participant;
+                participants[^1] = participant;
             }
 
             public void Add(Participant[] participants)
             {
-                if (this.participants == null || participants == null) return;
+                if (participants == null) return;
+                if (this.participants == null) this.participants = new Participant[0];
 
                 this.participants = this.participants.Concat(participants).ToArray();
             }
@@ -171,11 +168,8 @@ namespace Lab_6
             protected override void ModificateMood()
             {
                 if (moods == null) return;
-                
-                for (int i = 0; i < moods.Length; i++)
-                {
-                    moods[i] += (double)i / 10;
-                }
+
+                moods = moods.Select((x, i) => x + (double)(i + 1) / 10).ToArray();
             }
         }
         public class IceSkating : Skating
@@ -187,11 +181,8 @@ namespace Lab_6
             protected override void ModificateMood()
             {
                 if (moods == null) return;
-                
-                for (int i = 0; i < moods.Length; i++)
-                {
-                    moods[i] += moods[i] * i / 100;
-                }
+
+                moods = moods.Select((x, i) => x * (i + 101) / 100).ToArray();
             }
         }
     }
