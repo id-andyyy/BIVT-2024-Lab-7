@@ -58,7 +58,7 @@ namespace Lab_6
             public void Print()
             {
                 Console.WriteLine($"Имя: {_name ?? "не задано"}");
-                Console.WriteLine($"Фамилия: {_surname ?? "не задано"}");
+                Console.WriteLine($"Фамилия: {_surname ?? "не задана"}");
 
                 Console.Write("Коэффициенты:\t");
                 if (_coefs == null) Console.WriteLine("не заданы");
@@ -172,7 +172,7 @@ namespace Lab_6
 
             public void Add(Participant participant)
             {
-                if (_participants == null) _participants = new Participant[0];
+                if (_participants == null) return;
 
                 Array.Resize(ref _participants, _participants.Length + 1);
                 _participants[^1] = participant;
@@ -181,8 +181,7 @@ namespace Lab_6
 
             public void Add(Participant[] participants)
             {
-                if (participants == null) return;
-                if (_participants == null) _participants = new Participant[0];
+                if (participants == null || _participants == null) return;
 
                 int n = _participants.Length;
                 _participants = _participants.Concat(participants).ToArray();

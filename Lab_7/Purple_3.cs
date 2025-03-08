@@ -78,7 +78,7 @@ namespace Lab_6
             public void Print()
             {
                 Console.WriteLine($"Имя: {_name ?? "не задано"}");
-                Console.WriteLine($"Фамилия: {_surname ?? "не задано"}");
+                Console.WriteLine($"Фамилия: {_surname ?? "не задана"}");
 
                 Console.Write("Оценки:\t");
                 if (_marks == null) Console.WriteLine("не заданы");
@@ -115,14 +115,14 @@ namespace Lab_6
         {
             protected Participant[] participants;
             protected double[] moods;
-            
+
             public Participant[] Participants => (Participant[])participants?.Clone();
             public double[] Moods => (double[])moods?.Clone();
 
             public Skating(double[] moods)
             {
                 participants = new Participant[0];
-                
+
                 if (moods == null) return;
                 this.moods = (double[])moods.Clone();
                 ModificateMood();
@@ -144,16 +144,15 @@ namespace Lab_6
 
             public void Add(Participant participant)
             {
-                if (participants == null) participants = new Participant[0];
-                
+                if (participants == null) return;
+
                 Array.Resize(ref participants, participants.Length + 1);
                 participants[^1] = participant;
             }
 
             public void Add(Participant[] participants)
             {
-                if (participants == null) return;
-                if (this.participants == null) this.participants = new Participant[0];
+                if (participants == null || this.participants == null) return;
 
                 this.participants = this.participants.Concat(participants).ToArray();
             }
@@ -172,6 +171,7 @@ namespace Lab_6
                 moods = moods.Select((x, i) => x + (double)(i + 1) / 10).ToArray();
             }
         }
+
         public class IceSkating : Skating
         {
             public IceSkating(double[] moods) : base(moods)

@@ -53,7 +53,7 @@ namespace Lab_6
             public void Print()
             {
                 Console.WriteLine($"Имя: {_name ?? "не задано"}");
-                Console.WriteLine($"Фамилия: {_surname ?? "не задано"}");
+                Console.WriteLine($"Фамилия: {_surname ?? "не задана"}");
                 Console.WriteLine($"Расстояние: {_distance}");
 
                 Console.Write($"Оценки:\t");
@@ -78,7 +78,7 @@ namespace Lab_6
             private string _name;
             private int _standard;
             private Participant[] _participants;
-            
+
             public string Name => _name;
             public int Standard => _standard;
             public Participant[] Participants => _participants; // if a copy is returned, Participant.Sort will not work
@@ -92,7 +92,7 @@ namespace Lab_6
 
             public void Add(Participant participant)
             {
-                if (_participants == null) _participants = new Participant[0];
+                if (_participants == null) return;
 
                 Array.Resize(ref _participants, _participants.Length + 1);
                 _participants[^1] = participant;
@@ -100,8 +100,7 @@ namespace Lab_6
 
             public void Add(Participant[] participants)
             {
-                if (participants == null) return;
-                if (_participants == null) _participants = new Participant[0];
+                if (participants == null || _participants == null) return;
 
                 _participants = _participants.Concat(participants).ToArray();
             }
