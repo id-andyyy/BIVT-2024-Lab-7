@@ -99,7 +99,7 @@ namespace Lab_6
                 if (_sportsmen == null) return;
 
                 Array.Resize(ref _sportsmen, _sportsmen.Length + 1);
-                _sportsmen[_sportsmen.Length - 1] = sportsman;
+                _sportsmen[^1] = sportsman;
             }
 
             public void Add(Sportsman[] sportsmen)
