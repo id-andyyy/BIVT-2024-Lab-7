@@ -191,7 +191,7 @@ namespace Lab_6
                 Split(out men, out women);
 
                 if (men.Length == 0 || women.Length == 0) return;
-                
+
                 int i = 0, j = 0, k = 0;
                 bool menFirst = men[0].Time <= women[0].Time;
                 while (i < men.Length && j < women.Length)

@@ -186,14 +186,16 @@ namespace Lab_6
                 var mounth = DateTime.Now.ToString("MM");
                 var year = DateTime.Now.ToString("yy");
                 var research = new Research($"No_{_id}_{mounth}/{year}");
-                
+
                 Array.Resize(ref _researches, _researches.Length + 1);
                 _researches[^1] = research;
-                
+
                 return research;
             }
 
-            public (string, double)[] GetGeneralReport(int question)  // the method will not work as intended because the task condition does not provide that the _responses field can be changed in the _researches array object
+            public (string, double)[]
+                GetGeneralReport(
+                    int question) // the method will not work as intended because the task condition does not provide that the _responses field can be changed in the _researches array object
             {
                 if (question > 3 || question < 1 || _researches == null) return null;
 
@@ -205,7 +207,7 @@ namespace Lab_6
 
                 return groupedAnswers.Select(x => (x.Key, (double)x.ToArray().Length / cntAnswers * 100)).ToArray();
             }
-            
+
             private string GetAnswerByQuestion(int question, Response response)
             {
                 switch (question)
