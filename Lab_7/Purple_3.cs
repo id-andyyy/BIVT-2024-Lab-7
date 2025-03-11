@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab_6
+namespace Lab_7
 {
     public class Purple_3
     {
@@ -116,7 +116,7 @@ namespace Lab_6
             protected Participant[] participants;
             protected double[] moods;
 
-            public Participant[] Participants => (Participant[])participants?.Clone();
+            public Participant[] Participants => participants;
             public double[] Moods => (double[])moods?.Clone();
 
             public Skating(double[] moods)
