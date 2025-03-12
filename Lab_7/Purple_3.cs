@@ -136,7 +136,7 @@ namespace Lab_7
                 int index = Array.FindIndex(participants, x => x.Marks != null && x.Marks.All(y => y == 0));
                 if (index == -1) return;
 
-                for (int i = 0; i < marks.Length; i++)
+                for (int i = 0; i < Math.Min(marks.Length, 7); i++)
                 {
                     participants[index].Evaluate(marks[i] * moods[i]);
                 }

@@ -37,9 +37,9 @@ namespace Lab_7
                 _distance = distance;
                 Array.Copy(marks, _marks, marks.Length);
 
-                int distancePoints = 60 + (_distance - 120) * 2;
+                int distancePoints = 60 + (_distance - target) * 2;
                 if (distancePoints < 0) distancePoints = 0;
-                Result += marks.Sum() - marks.Max() - marks.Min() + distancePoints + (distance >= target ? 60 : 0);
+                Result += marks.Sum() - marks.Max() - marks.Min() + distancePoints;
             }
 
             public static void Sort(Participant[] array)
@@ -81,7 +81,7 @@ namespace Lab_7
 
             public string Name => _name;
             public int Standard => _standard;
-            public Participant[] Participants => _participants; // if a copy is returned, Participant.Sort will not work
+            public Participant[] Participants => _participants;
 
             public SkiJumping(string name, int standard)
             {
@@ -108,6 +108,7 @@ namespace Lab_7
             public void Jump(int distance, int[] marks)
             {
                 if (_participants == null) return;
+                
                 int index = Array.FindIndex(_participants, x => x.Marks != null && x.Marks.All(y => y == 0));
                 if (index == -1) return;
 

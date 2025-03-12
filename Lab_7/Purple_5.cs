@@ -28,14 +28,16 @@ namespace Lab_7
             {
                 if (responses == null) return 0;
 
+                var current = this;
+                
                 switch (questionNumber)
                 {
                     case 1:
-                        return responses.Count(x => x._animal != null);
+                        return responses.Count(x => x._animal != null && x._animal == current._animal);
                     case 2:
-                        return responses.Count(x => x._characterTrait != null);
+                        return responses.Count(x => x._characterTrait != null && x._characterTrait == current._characterTrait);
                     case 3:
-                        return responses.Count(x => x._concept != null);
+                        return responses.Count(x => x._concept != null && x._concept == current._concept);
                     default:
                         return 0;
                 }
