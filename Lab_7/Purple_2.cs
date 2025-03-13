@@ -18,7 +18,7 @@ namespace Lab_7
             public string Surname => _surname;
             public int Distance => _distance;
 
-            public int[] Marks => (int[])_marks?.Clone();
+            public int[] Marks => _marks;
 
             public int Result { get; private set; }
 
@@ -32,14 +32,12 @@ namespace Lab_7
 
             public void Jump(int distance, int[] marks, int target)
             {
-                if (marks == null || marks.Length != 5 || _marks == null) return;
+                if (marks == null || _marks == null) return;
 
                 _distance = distance;
-                Array.Copy(marks, _marks, marks.Length);
+                Array.Copy(marks, _marks, Math.Min(marks.Length, 5));
 
-                int distancePoints = 60 + (_distance - target) * 2;
-                if (distancePoints < 0) distancePoints = 0;
-                Result += marks.Sum() - marks.Max() - marks.Min() + distancePoints;
+                Result = Math.Max(marks.Sum() - marks.Max() - marks.Min() + 60 + (_distance - target) * 2, 0);
             }
 
             public static void Sort(Participant[] array)

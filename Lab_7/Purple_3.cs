@@ -117,14 +117,17 @@ namespace Lab_7
             protected double[] moods;
 
             public Participant[] Participants => participants;
-            public double[] Moods => (double[])moods?.Clone();
+            public double[] Moods => moods;
 
             public Skating(double[] moods)
             {
                 participants = new Participant[0];
 
                 if (moods == null) return;
-                this.moods = (double[])moods.Clone();
+                
+                this.moods = new double[moods.Length];
+                Array.Copy(moods, this.moods, Math.Min(moods.Length, 7));
+                
                 ModificateMood();
             }
 
