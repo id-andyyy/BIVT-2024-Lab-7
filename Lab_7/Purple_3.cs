@@ -22,7 +22,7 @@ namespace Lab_7
             public double[] Marks => (double[])_marks?.Clone();
             public int[] Places => (int[])_places?.Clone();
 
-            public int Score => _places == null ? 0 : _places.Sum();
+            public int Score => _places?.Sum() ?? 0;
 
             public Participant(string name, string surname)
             {
@@ -104,8 +104,8 @@ namespace Lab_7
                     Console.WriteLine();
                 }
 
-                Console.WriteLine($"Лучшее место: {_places.Min()}");
-                Console.WriteLine($"Сумма оценок: {Math.Round(_marks.Sum(), 2)}");
+                Console.WriteLine($"Лучшее место: {_places?.Min() ?? 0}");
+                Console.WriteLine($"Сумма оценок: {Math.Round(_marks?.Sum() ?? 0, 2)}");
                 Console.WriteLine($"Результат: {Score}");
                 Console.WriteLine();
             }
@@ -125,7 +125,7 @@ namespace Lab_7
 
                 if (moods == null) return;
                 
-                this.moods = new double[moods.Length];
+                this.moods = new double[Math.Min(moods.Length, 7)];
                 Array.Copy(moods, this.moods, Math.Min(moods.Length, 7));
                 
                 ModificateMood();

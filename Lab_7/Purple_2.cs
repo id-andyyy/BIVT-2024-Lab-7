@@ -18,7 +18,7 @@ namespace Lab_7
             public string Surname => _surname;
             public int Distance => _distance;
 
-            public int[] Marks => _marks;
+            public int[] Marks => (int[])_marks?.Clone();
 
             public int Result { get; private set; }
 
@@ -32,10 +32,10 @@ namespace Lab_7
 
             public void Jump(int distance, int[] marks, int target)
             {
-                if (marks == null || _marks == null) return;
+                if (marks == null || _marks == null || marks.Length != 5 || distance < 0) return;
 
                 _distance = distance;
-                Array.Copy(marks, _marks, Math.Min(marks.Length, 5));
+                Array.Copy(marks, _marks, marks.Length);
 
                 Result = Math.Max(marks.Sum() - marks.Max() - marks.Min() + 60 + (_distance - target) * 2, 0);
             }
@@ -79,7 +79,7 @@ namespace Lab_7
 
             public string Name => _name;
             public int Standard => _standard;
-            public Participant[] Participants => _participants;
+            public Participant[] Participants => (Participant[])_participants?.Clone();
 
             public SkiJumping(string name, int standard)
             {
